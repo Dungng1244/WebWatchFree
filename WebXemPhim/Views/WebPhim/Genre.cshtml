@@ -1,0 +1,14 @@
+﻿@model IEnumerable<WebXemPhim.Models.TheLoai>
+
+@foreach(var item in Model)
+{
+    <a href="@Url.Action("PhimTheoGenre","WebPhim",new {id = item.MaTL})" class="sub-nav">
+        @item.TenTL         
+    </a>
+ }
+
+
+
+
+
+

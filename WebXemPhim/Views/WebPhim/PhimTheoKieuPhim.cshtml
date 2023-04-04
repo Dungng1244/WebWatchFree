@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WebXemPhim.Models.Phim>
+@{
+    ViewBag.Title = "PhimTheoKieuPhim";
+    Layout = "~/Views/Shared/_LayoutChung.cshtml";
+}
+
+<div class="section" id="latest-section">
+    <div class="section-wrapper" id="section-wrapper">
+        <div style="top: -100px; left: 80px;position:absolute " class="section-header">
+            Films by Films type
+        </div>
+
+        <div style="top: -70px; left: 50px " class="movies-slide row">
+            @foreach (var phim in Model)
+            {
+                <a @Url.Action("Details", "WebPhim", new { id = phim.Maphim }) href="https://localhost:44337/WebPhim/Details"
+                   class="movie-item col-3-5 m-5 s-11 to-top show-on-scroll">
+                    <div>
+                        <img src="~/img/Images/@phim.Anhbia" alt="@phim.TenPhim">
+                        <div class="movie-item-content">
+                            <div class="movie-item-title">
+                                @phim.TenPhim
+                            </div>
+
+                            <div class="movies-infors-card">
+                                <div class="movies-infor">
+                                    <ion-icon name="bookmark-outline"></ion-icon>
+                                    <span>9.0</span>
+                                </div>
+                                <div class="movies-infor">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span>120 mins</span>
+                                </div>
+                                <div class="movies-infor">
+                                    <ion-icon name="cube-outline"></ion-icon>
+                                    <span>FHD</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="movie-item-overlay">
+                    </div>
+                    <div class="movie-item-act">
+                        <!-- <div class="ring"></div> -->
+                        <i class='bx bxs-right-arrow'></i>
+
+                        <div>
+                            <i class='bx bxs-share-alt'></i>
+                            <i class='bx bxs-heart'></i>
+                            <i class='bx bx-plus-medical'></i>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</div>
+

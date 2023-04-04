@@ -1,0 +1,8 @@
+﻿@model IEnumerable < WebXemPhim.Models.KieuPhim>
+
+@foreach(var item in Model)
+{
+    <a href="@Url.Action("PhimTheoKieuPhim","WebPhim",new {id = item.MaKieu})" class="sub-nav">
+        @item.TenKieu
+    </a>
+}

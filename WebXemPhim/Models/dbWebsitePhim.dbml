@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WebsitePhim" Class="dbWebsitePhimDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-F8JF2O8;Initial Catalog=WebsitePhim;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="WebsitePhimConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Admin" Member="Admins">
+    <Type Name="Admin">
+      <Column Name="MaAdmin" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaTKadmin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ten" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SDT" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="TKAdmin_Admin" Member="TKAdmin" ThisKey="MaTKadmin" OtherKey="MaTKadmin" Type="TKAdmin" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TKNguoiDung" Member="TKNguoiDungs">
+    <Type Name="TKNguoiDung">
+      <Column Name="MaTK" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenDN" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MatKhau" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="TKNguoiDung_KhoYeuThich" Member="KhoYeuThiches" ThisKey="MaTK" OtherKey="MaTK" Type="KhoYeuThich" />
+      <Association Name="TKNguoiDung_NguoiDung" Member="NguoiDungs" ThisKey="MaTK" OtherKey="MaTK" Type="NguoiDung" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BaoCao" Member="BaoCaos">
+    <Type Name="BaoCao">
+      <Column Name="MaBC" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaKhach" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NoiDung" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="NguoiDung_BaoCao" Member="NguoiDung" ThisKey="MaKhach" OtherKey="MaKhach" Type="NguoiDung" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BinhLuan" Member="BinhLuans">
+    <Type Name="BinhLuan">
+      <Column Name="MaBL" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaPhim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaKhach" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NoiDung" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="NguoiDung_BinhLuan" Member="NguoiDung" ThisKey="MaKhach" OtherKey="MaKhach" Type="NguoiDung" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CTPhim" Member="CTPhims">
+    <Type Name="CTPhim">
+      <Column Name="MaPhim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaDV" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="DienVien_CTPhim" Member="DienVien" ThisKey="MaDV" OtherKey="MaDV" Type="DienVien" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Phim_CTPhim" Member="Phim" ThisKey="MaPhim" OtherKey="Maphim" Type="Phim" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DienVien" Member="DienViens">
+    <Type Name="DienVien">
+      <Column Name="MaDV" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenDV" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="DienVien_CTPhim" Member="CTPhims" ThisKey="MaDV" OtherKey="MaDV" Type="CTPhim" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KhoYeuThich" Member="KhoYeuThiches">
+    <Type Name="KhoYeuThich">
+      <Column Name="MaPhimYT" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaPhim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaTK" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TKNguoiDung_KhoYeuThich" Member="TKNguoiDung" ThisKey="MaTK" OtherKey="MaTK" Type="TKNguoiDung" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Phim_KhoYeuThich" Member="Phim" ThisKey="MaPhim" OtherKey="Maphim" Type="Phim" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KieuPhim" Member="KieuPhims">
+    <Type Name="KieuPhim">
+      <Column Name="MaKieu" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenKieu" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="KieuPhim_Phim" Member="Phims" ThisKey="MaKieu" OtherKey="MaKieu" Type="Phim" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LienHe" Member="LienHes">
+    <Type Name="LienHe">
+      <Column Name="MaLH" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenLH" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="SDT" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NguoiDung" Member="NguoiDungs">
+    <Type Name="NguoiDung">
+      <Column Name="MaKhach" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaTK" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenKhach" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SDT" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="NguoiDung_BaoCao" Member="BaoCaos" ThisKey="MaKhach" OtherKey="MaKhach" Type="BaoCao" />
+      <Association Name="NguoiDung_BinhLuan" Member="BinhLuans" ThisKey="MaKhach" OtherKey="MaKhach" Type="BinhLuan" />
+      <Association Name="TKNguoiDung_NguoiDung" Member="TKNguoiDung" ThisKey="MaTK" OtherKey="MaTK" Type="TKNguoiDung" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NhaSanXuat" Member="NhaSanXuats">
+    <Type Name="NhaSanXuat">
+      <Column Name="MaNSX" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenNSX" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="NhaSanXuat_Phim" Member="Phims" ThisKey="MaNSX" OtherKey="MaNSX" Type="Phim" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Phim" Member="Phims">
+    <Type Name="Phim">
+      <Column Name="Maphim" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaQG" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaKieu" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaNSX" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaTL" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenPhim" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NamSX" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SoTap" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ngaycapnhat" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Anhbia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Mota" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Phim_CTPhim" Member="CTPhims" ThisKey="Maphim" OtherKey="MaPhim" Type="CTPhim" />
+      <Association Name="Phim_KhoYeuThich" Member="KhoYeuThiches" ThisKey="Maphim" OtherKey="MaPhim" Type="KhoYeuThich" />
+      <Association Name="KieuPhim_Phim" Member="KieuPhim" ThisKey="MaKieu" OtherKey="MaKieu" Type="KieuPhim" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="NhaSanXuat_Phim" Member="NhaSanXuat" ThisKey="MaNSX" OtherKey="MaNSX" Type="NhaSanXuat" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="QuocGia_Phim" Member="QuocGia" ThisKey="MaQG" OtherKey="MaQG" Type="QuocGia" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="TheLoai_Phim" Member="TheLoai" ThisKey="MaTL" OtherKey="MaTL" Type="TheLoai" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QuangCao" Member="QuangCaos">
+    <Type Name="QuangCao">
+      <Column Name="MaQC" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenQC" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QuocGia" Member="QuocGias">
+    <Type Name="QuocGia">
+      <Column Name="MaQG" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenQG" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="QuocGia_Phim" Member="Phims" ThisKey="MaQG" OtherKey="MaQG" Type="Phim" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TheLoai" Member="TheLoais">
+    <Type Name="TheLoai">
+      <Column Name="MaTL" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenTL" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="TheLoai_Phim" Member="Phims" ThisKey="MaTL" OtherKey="MaTL" Type="Phim" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TKAdmin" Member="TKAdmins">
+    <Type Name="TKAdmin">
+      <Column Name="MaTKadmin" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenTK" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="MatKhauTK" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="TKAdmin_Admin" Member="Admins" ThisKey="MaTKadmin" OtherKey="MaTKadmin" Type="Admin" />
+    </Type>
+  </Table>
+</Database>

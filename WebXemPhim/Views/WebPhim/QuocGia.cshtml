@@ -1,0 +1,8 @@
+﻿@model IEnumerable<WebXemPhim.Models.QuocGia>
+
+@foreach (var item in Model)
+{
+    <a href="@Url.Action("PhimTheoQG","WebPhim",new {id = item.MaQG})" class="sub-nav">
+        @item.TenQG
+    </a>
+}
